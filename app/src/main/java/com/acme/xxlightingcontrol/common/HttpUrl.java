@@ -1,4 +1,4 @@
-package com.acme.xxlightingcontrol.net;
+package com.acme.xxlightingcontrol.common;
 
 import com.acme.xxlightingcontrol.BuildConfig;
 

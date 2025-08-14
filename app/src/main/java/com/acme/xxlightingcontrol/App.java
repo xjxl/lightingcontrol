@@ -4,8 +4,9 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.acme.xxlightingcontrol.lib.base.BaseApp;
+import com.acme.xxlightingcontrol.lib.net.NetInfo;
+import com.acme.xxlightingcontrol.lib.net.NetInfoUtil;
 import com.acme.xxlightingcontrol.lib.net.http.HttpClient;
-import com.acme.xxlightingcontrol.lib.xutil.IpAddressHelper;
 import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
 import com.acme.xxlightingcontrol.lib.net.udp.UDPMessageListener;
 import com.acme.xxlightingcontrol.lib.net.udp.UDPServer;
@@ -13,6 +14,7 @@ import com.acme.xxlightingcontrol.lib.net.udp.UDPStatsManager;
 
 import net.time4j.android.ApplicationStarter;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,15 +33,13 @@ public class App extends BaseApp implements UDPMessageListener {
         super.onCreate();
         ApplicationStarter.initialize(this, true);
         SystemClock.sleep(TimeUnit.SECONDS.toMillis(3));
-        String ip = IpAddressHelper.getWifiIpAddress(this);
+        List<NetInfo> netInfos = NetInfoUtil.getNetInfo();
         HttpClient.getInstance().loggingEnabled(BuildConfig.DEBUG).timeout(BuildConfig.TIMEOUT)
-                .baseURL("http://" + ip + ":" + BuildConfig.PORT);
+                .baseURL("http://" + netInfos.get(0).getIp() + ":" + BuildConfig.PORT);
         initUdp();
     }
 
     public void initUdp() {
-
-        // 启动状态管理
         statsManager = UDPStatsManager.getInstance(this);
         statsManager.startStatsThread();
         // 启动服务实例
@@ -56,7 +56,7 @@ public class App extends BaseApp implements UDPMessageListener {
                             Log.e("APP", "等待UDP服务启动...");
                             continue;
                         }
-                        udpClient = UDPClient.getInstance(udpServer.getChannel(), "2.255.255.255", 10000, statsManager);
+                        udpClient = UDPClient.getInstance(udpServer.getChannel(), NetInfoUtil.getBroadcastAddress(), 10000, statsManager);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

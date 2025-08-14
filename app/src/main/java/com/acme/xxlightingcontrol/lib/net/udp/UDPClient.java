@@ -53,7 +53,6 @@ public class UDPClient {
         this.statsManager = statsManager;
     }
 
-
     public void sendMessage(String message) {
         sendMessage(message, null);
     }
