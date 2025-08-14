@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="XButton">
+        <attr name="preActionAble" format="boolean" />
+        <attr name="preActionText" format="string" />
+    </declare-styleable>
+    <declare-styleable name="LightBrightnessView">
+        <attr name="specialColorHidden" format="boolean" />
+    </declare-styleable>
+</resources>

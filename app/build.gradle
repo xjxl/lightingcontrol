@@ -1,0 +1,107 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.acme.xxlightingcontrol'
+    compileSdk 35
+
+    packagingOptions {
+        resources.excludes.add("META-INF/license/*")
+        resources.excludes.add("META-INF/INDEX.LIST")
+        resources.excludes.add("META-INF/**/*.MF")
+        resources.excludes.add("META-INF/**/*.json")
+        resources.excludes.add("META-INF/**/*.properties")
+        resources.excludes.add("META-INF/*.properties")
+    }
+
+    defaultConfig {
+        applicationId "com.acme.xxlightingcontrol"
+        minSdk 33
+        targetSdk 35
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "Long", "TIMEOUT", "30L"
+            buildConfigField "String", "HOST", "\"http://2.0.0.122\""
+            buildConfigField "Integer", "PORT", "8081"
+            buildConfigField "String", "CONTEXT", "\"/\""
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "Long", "TIMEOUT", "30L"
+            buildConfigField "String", "HOST", "\"2.0.0.122\""
+            buildConfigField "Integer", "PORT", "8081"
+            buildConfigField "String", "CONTEXT", "\"/\""
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation('com.squareup.retrofit2:converter-simplexml:2.3.0') {
+        exclude module: 'stax-api'
+    }
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'org.aspectj:aspectjrt:1.8.9'
+    implementation 'com.google.dagger:dagger:2.57'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.57'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.9'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.8.9'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.3.0'
+    implementation 'com.squareup.okio:okio:1.10.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.1.6'
+    implementation "com.github.skydoves:colorpickerview:2.3.0"
+    implementation "net.time4j:time4j-android:4.8-2021a"
+    implementation "io.netty:netty-all:4.2.3.Final"
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

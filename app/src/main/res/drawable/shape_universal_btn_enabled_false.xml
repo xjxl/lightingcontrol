@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright (c) 2017 xjliao.me created by xjliao
+  ~ ProjectName: xjl
+  ~ ModuleName: xjlib
+  ~ FileName: shape_universal_btn_enabled_false.xml
+  ~ ClassName: shape_universal_btn_enabled_false.xml
+  ~ LastModified: 11/30/17 4:39 PM
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="5dp"></corners>
+
+    <solid android:color="@color/btn_enabled_false" />
+
+</shape>

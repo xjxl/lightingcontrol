@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:background="@drawable/acme_logo" />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:text="舞台灯光音响行业领导平台"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:background="@drawable/acme_qr_cn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:text="佛山市毅丰电器实业有限公司"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/white"
+        android:layout_marginTop="1dp"
+        android:text="总机:+86-757-88325001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:textColor="@color/white"
+        android:text="E-mail: sales@acme.com.cn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="1dp"
+        android:textColor="@color/white"
+        android:text="地址:中国广东省佛山市高明区荷城街道高明大道东898号"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="程序版本:"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0.1"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</LinearLayout>
