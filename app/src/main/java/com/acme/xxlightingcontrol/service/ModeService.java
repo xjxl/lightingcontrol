@@ -1,7 +1,7 @@
 package com.acme.xxlightingcontrol.service;
 
 import com.acme.xxlightingcontrol.dto.ModeDto;
-import com.acme.xxlightingcontrol.lib.net.XResponse;
+import com.acme.xxlightingcontrol.lib.net.http.XResponse;
 import com.acme.xxlightingcontrol.net.HttpUrl;
 
 import java.util.List;

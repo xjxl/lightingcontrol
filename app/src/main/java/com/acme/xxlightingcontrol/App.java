@@ -4,12 +4,12 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.acme.xxlightingcontrol.lib.base.BaseApp;
-import com.acme.xxlightingcontrol.lib.net.HttpClient;
+import com.acme.xxlightingcontrol.lib.net.http.HttpClient;
 import com.acme.xxlightingcontrol.lib.xutil.IpAddressHelper;
-import com.acme.xxlightingcontrol.net.udp.UDPClient;
-import com.acme.xxlightingcontrol.net.udp.UDPMessageListener;
-import com.acme.xxlightingcontrol.net.udp.UDPServer;
-import com.acme.xxlightingcontrol.net.udp.UDPStatsManager;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPMessageListener;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPServer;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPStatsManager;
 
 import net.time4j.android.ApplicationStarter;
 

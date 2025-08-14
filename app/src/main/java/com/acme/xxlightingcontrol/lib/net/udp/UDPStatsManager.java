@@ -1,4 +1,4 @@
-package com.acme.xxlightingcontrol.net.udp;
+package com.acme.xxlightingcontrol.lib.net.udp;
 
 import android.util.Log;
 

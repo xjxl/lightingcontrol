@@ -1,9 +1,8 @@
-package com.acme.xxlightingcontrol.net.udp;
+package com.acme.xxlightingcontrol.lib.net.udp;
 
 import android.util.Log;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.atomic.AtomicLong;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

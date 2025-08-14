@@ -6,8 +6,8 @@ import com.acme.xxlightingcontrol.dto.ModeDto;
 import com.acme.xxlightingcontrol.interactor.ModeInteractor;
 import com.acme.xxlightingcontrol.lib.base.BaseInteractor;
 import com.acme.xxlightingcontrol.lib.listener.OnResponseListener;
-import com.acme.xxlightingcontrol.lib.net.XCallback;
-import com.acme.xxlightingcontrol.lib.net.XResponse;
+import com.acme.xxlightingcontrol.lib.net.http.XCallback;
+import com.acme.xxlightingcontrol.lib.net.http.XResponse;
 import com.acme.xxlightingcontrol.module.ServiceModule;
 import com.acme.xxlightingcontrol.service.ModeService;
 

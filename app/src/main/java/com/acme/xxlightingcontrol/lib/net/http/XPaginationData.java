@@ -1,4 +1,4 @@
-package com.acme.xxlightingcontrol.lib.net;
+package com.acme.xxlightingcontrol.lib.net.http;
 
 /**
  * @param <T>

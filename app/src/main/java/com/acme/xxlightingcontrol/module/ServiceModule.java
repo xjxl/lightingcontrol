@@ -1,6 +1,6 @@
 package com.acme.xxlightingcontrol.module;
 
-import com.acme.xxlightingcontrol.lib.net.HttpClient;
+import com.acme.xxlightingcontrol.lib.net.http.HttpClient;
 import com.acme.xxlightingcontrol.service.ModeService;
 import com.acme.xxlightingcontrol.service.ProductService;
 
