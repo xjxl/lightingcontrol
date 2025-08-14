@@ -3,6 +3,7 @@ package com.acme.xxlightingcontrol;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.acme.xxlightingcontrol.common.MessageConstants;
 import com.acme.xxlightingcontrol.lib.base.BaseApp;
 import com.acme.xxlightingcontrol.lib.net.NetInfo;
 import com.acme.xxlightingcontrol.lib.net.NetInfoUtil;
@@ -28,12 +29,14 @@ public class App extends BaseApp implements UDPMessageListener {
 
     public static UDPClient udpClient;
 
+    public static List<NetInfo> netInfos;
+
     @Override
     public void onCreate() {
         super.onCreate();
         ApplicationStarter.initialize(this, true);
         SystemClock.sleep(TimeUnit.SECONDS.toMillis(3));
-        List<NetInfo> netInfos = NetInfoUtil.getNetInfo();
+        netInfos = NetInfoUtil.getNetInfo();
         HttpClient.getInstance().loggingEnabled(BuildConfig.DEBUG).timeout(BuildConfig.TIMEOUT)
                 .baseURL("http://" + netInfos.get(0).getIp() + ":" + BuildConfig.PORT);
         initUdp();
@@ -42,6 +45,7 @@ public class App extends BaseApp implements UDPMessageListener {
     public void initUdp() {
         statsManager = UDPStatsManager.getInstance(this);
         statsManager.startStatsThread();
+        statsManager.setMessagePrefix(netInfos.get(0).getMacAddress() + ":");
         // 启动服务实例
         udpServer = UDPServer.getInstance(this, 10002, statsManager);
         udpServer.serverStart();
@@ -63,12 +67,29 @@ public class App extends BaseApp implements UDPMessageListener {
                 }
             }
         }).start();
+        ping();
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
         udpServer.shutdown();
+    }
+
+    public void ping() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (; ; ) {
+                    try {
+                        Thread.sleep(20000);
+                        udpClient.sendMessage(MessageConstants.CHECK_CONNECT);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -83,7 +104,9 @@ public class App extends BaseApp implements UDPMessageListener {
 
     @Override
     public void onMessageReceived(String message, String senderHost, int senderPort) {
-
+        if (senderHost.equals(netInfos.get(0).getIp())) {
+            Log.i("APP", "收到: " + senderHost + ":" + senderPort + "，消息: " + message);
+        }
     }
 
     @Override

@@ -19,6 +19,8 @@ public class UDPStatsManager {
 
     private ScheduledExecutorService scheduler;
 
+    private String messagePrefix;
+
     private static final String TAG = "UDPStatsManger";
 
     public final AtomicLong sentPackets = new AtomicLong(0);
@@ -35,6 +37,7 @@ public class UDPStatsManager {
     public UDPStatsManager(UDPMessageListener udpMessageListener) {
         this.udpMessageListener = udpMessageListener;
         scheduler = Executors.newScheduledThreadPool(1);
+
     }
 
     public void startStatsThread() {
@@ -76,4 +79,11 @@ public class UDPStatsManager {
         }
     }
 
+    public String getMessagePrefix() {
+        return messagePrefix.toLowerCase().replace(":", "-");
+    }
+
+    public void setMessagePrefix(String messagePrefix) {
+        this.messagePrefix = messagePrefix;
+    }
 }

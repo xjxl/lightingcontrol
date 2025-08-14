@@ -65,7 +65,7 @@ public class UDPClient {
             }
             return;
         }
-        ChannelFuture future = channel.writeAndFlush(new Message(message, recipient));
+        ChannelFuture future = channel.writeAndFlush(new Message(statsManager.getMessagePrefix() + message, recipient));
         future.addListener(new GenericFutureListener<Future<? super Void>>() {
             @Override
             public void operationComplete(Future<? super Void> future) {
