@@ -18,7 +18,7 @@ public class NetInfo {
     }
 
     public String getMacAddress() {
-        return macAddress;
+        return macAddress.toLowerCase().replace(":", "-");
     }
 
     public void setMacAddress(String macAddress) {

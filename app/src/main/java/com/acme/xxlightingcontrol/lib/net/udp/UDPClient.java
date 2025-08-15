@@ -2,6 +2,8 @@ package com.acme.xxlightingcontrol.lib.net.udp;
 
 import android.util.Log;
 
+import com.acme.xxlightingcontrol.common.MessageConstants;
+
 import java.net.InetSocketAddress;
 
 import io.netty.channel.Channel;
@@ -65,7 +67,8 @@ public class UDPClient {
             }
             return;
         }
-        ChannelFuture future = channel.writeAndFlush(new Message(statsManager.getMessagePrefix() + message, recipient));
+        Message messageObj = new Message(statsManager.getMessagePrefix() + statsManager.getMessageSplit() + message, recipient);
+        ChannelFuture future = channel.writeAndFlush(messageObj);
         future.addListener(new GenericFutureListener<Future<? super Void>>() {
             @Override
             public void operationComplete(Future<? super Void> future) {

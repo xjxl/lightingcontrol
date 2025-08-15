@@ -21,6 +21,8 @@ public class UDPStatsManager {
 
     private String messagePrefix;
 
+    private String messageSplit;
+
     private static final String TAG = "UDPStatsManger";
 
     public final AtomicLong sentPackets = new AtomicLong(0);
@@ -80,10 +82,18 @@ public class UDPStatsManager {
     }
 
     public String getMessagePrefix() {
-        return messagePrefix.toLowerCase().replace(":", "-");
+        return messagePrefix;
     }
 
     public void setMessagePrefix(String messagePrefix) {
         this.messagePrefix = messagePrefix;
+    }
+
+    public String getMessageSplit() {
+        return messageSplit;
+    }
+
+    public void setMessageSplit(String messageSplit) {
+        this.messageSplit = messageSplit;
     }
 }

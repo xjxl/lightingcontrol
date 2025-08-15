@@ -45,7 +45,8 @@ public class App extends BaseApp implements UDPMessageListener {
     public void initUdp() {
         statsManager = UDPStatsManager.getInstance(this);
         statsManager.startStatsThread();
-        statsManager.setMessagePrefix(netInfos.get(0).getMacAddress() + ":");
+        statsManager.setMessagePrefix(netInfos.get(0).getMacAddress());
+        statsManager.setMessageSplit(":");
         // 启动服务实例
         udpServer = UDPServer.getInstance(this, 10002, statsManager);
         udpServer.serverStart();
