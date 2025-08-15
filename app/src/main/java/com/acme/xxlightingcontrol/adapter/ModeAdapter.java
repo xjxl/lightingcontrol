@@ -56,6 +56,7 @@ public class ModeAdapter extends RecyclerView.Adapter<ModeAdapter.ViewHolder> {
                         if (selectedPosition != RecyclerView.NO_POSITION) {
                             notifyItemChanged(selectedPosition);
                         }
+                        mRecyclerItemClickListener.onItemClick(v, adapterPosition);
                     }
                 }
             });
