@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.acme.xxlightingcontrol.adapter.ModeAdapter;
 import com.acme.xxlightingcontrol.common.Constants;
+import com.acme.xxlightingcontrol.common.MessageConstants;
 import com.acme.xxlightingcontrol.component.DaggerPresenterComponent;
 import com.acme.xxlightingcontrol.databinding.FragmentModeBinding;
 import com.acme.xxlightingcontrol.dto.ModeDto;
 import com.acme.xxlightingcontrol.lib.annotation.Progress;
 import com.acme.xxlightingcontrol.lib.base.BaseFragment;
 import com.acme.xxlightingcontrol.lib.listener.OnRecyclerItemClickListener;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
 import com.acme.xxlightingcontrol.lib.xutil.XSharedPreferences;
 import com.acme.xxlightingcontrol.module.PresenterModule;
 import com.acme.xxlightingcontrol.prosenter.ModePresenter;
@@ -106,7 +108,10 @@ public class ModeFragment extends BaseFragment implements ModeView {
         modeAdapter = new ModeAdapter(getActivity(), modes, new OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                modeAdapter.notifyDataSetChanged();
+                final ModeDto modeDto = modes.get(position);
+                final String cmdMessage = MessageConstants.LIGHT + modeDto.getType();
+                UDPClient.getInstance().sendMessage(cmdMessage);
+                modeAdapter.notifyItemChanged(position);
             }
         });
         fragmentModeBinding.modeRv.setAdapter(modeAdapter);
@@ -132,6 +137,11 @@ public class ModeFragment extends BaseFragment implements ModeView {
             public void run() {
                 for (ModeDto modeDto : modes) {
                     Picasso.with(getActivity()).load(modeDto.getIconClick()).fetch();
+                    if (modeDto.getChildren() != null && modeDto.getChildren().size() > 0) {
+                        for (ModeDto childModeDto : modeDto.getChildren()) {
+                            Picasso.with(getActivity()).load(childModeDto.getIconClick()).fetch();
+                        }
+                    }
                 }
             }
         }).start();

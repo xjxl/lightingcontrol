@@ -6,28 +6,36 @@
     <ImageView
         android:id="@+id/mode_image_iv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ImageView>
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/mode_name_tv"
         android:layout_width="match_parent"
-        android:layout_marginTop="150dp"
-        android:text="测是模式1"
-        android:gravity="center"
         android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:text="测是模式1"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/child_mode_rv"
-        android:layout_marginTop="180dp"
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="180dp"
         android:dividerHeight="0.5dp"
+        android:orientation="horizontal"
         android:paddingLeft="5dp"
-        android:scrollbars="horizontal"
         android:paddingRight="5dp"
-        />
+        android:scrollbars="horizontal">
+
+        <RadioGroup
+            android:id="@+id/child_mode_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:divider="@drawable/radio_group_divider"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:showDividers="middle"/>
+    </HorizontalScrollView>
 </RelativeLayout>

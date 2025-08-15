@@ -37,6 +37,10 @@ public class ModeDto {
     @JsonProperty("children")
     private List<ModeDto> children;
 
+    private boolean haveChild;
+
+    private int selectedChildIndex = -1;
+
     public ModeDto() {
 
     }
@@ -153,4 +157,21 @@ public class ModeDto {
     public void setChildren(List<ModeDto> children) {
         this.children = children;
     }
+
+    public boolean isHaveChild() {
+        return this.children != null && !this.children.isEmpty();
+    }
+
+    public void setHaveChild(boolean haveChild) {
+        this.haveChild = haveChild;
+    }
+
+    public int getSelectedChildIndex() {
+        return selectedChildIndex;
+    }
+
+    public void setSelectedChildIndex(int selectedChildIndex) {
+        this.selectedChildIndex = selectedChildIndex;
+    }
+
 }
