@@ -35,11 +35,28 @@ public class App extends BaseApp implements UDPMessageListener {
     public void onCreate() {
         super.onCreate();
         ApplicationStarter.initialize(this, true);
-        SystemClock.sleep(TimeUnit.SECONDS.toMillis(3));
-        netInfos = NetInfoUtil.getNetInfo();
-        HttpClient.getInstance().loggingEnabled(BuildConfig.DEBUG).timeout(BuildConfig.TIMEOUT)
-                .baseURL("http://" + netInfos.get(0).getIp() + ":" + BuildConfig.PORT);
-        initUdp();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (; ; ) {
+                    try {
+                        Thread.sleep(1000L);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    SystemClock.sleep(TimeUnit.SECONDS.toMillis(5));
+                    netInfos = NetInfoUtil.getNetInfo();
+                    if (netInfos.size() <= 0) {
+                        continue;
+                    }
+                    HttpClient.getInstance().loggingEnabled(BuildConfig.DEBUG).timeout(BuildConfig.TIMEOUT)
+                            .baseURL("http://" + netInfos.get(0).getIp() + ":" + BuildConfig.PORT);
+                    initUdp();
+                    break;
+                }
+            }
+        }).start();
+
     }
 
     public void initUdp() {

@@ -9,4 +9,6 @@ public class MessageConstants {
 
     public static final String LIGHT = "light_";
 
+    public static final String PRODUCT = "light_";
+
 }

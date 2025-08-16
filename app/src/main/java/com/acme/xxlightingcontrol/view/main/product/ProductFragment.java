@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.acme.xxlightingcontrol.adapter.GridSpacingItemDecoration;
 import com.acme.xxlightingcontrol.adapter.ProductAdapter;
 import com.acme.xxlightingcontrol.common.Constants;
+import com.acme.xxlightingcontrol.common.MessageConstants;
 import com.acme.xxlightingcontrol.component.DaggerPresenterComponent;
 import com.acme.xxlightingcontrol.databinding.FragmentProductBinding;
 import com.acme.xxlightingcontrol.dto.ProductDto;
 import com.acme.xxlightingcontrol.lib.annotation.Progress;
 import com.acme.xxlightingcontrol.lib.base.BaseFragment;
 import com.acme.xxlightingcontrol.lib.listener.OnRecyclerItemClickListener;
+import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
 import com.acme.xxlightingcontrol.lib.xutil.XSharedPreferences;
 import com.acme.xxlightingcontrol.lib.xutil.XToast;
 import com.acme.xxlightingcontrol.module.PresenterModule;
@@ -106,6 +108,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
             public void onItemClick(View v, int position) {
                 ProductDto productDto = products.get(position);
                 XToast.showShortMsg(getActivity(), productDto.getName());
+                UDPClient.getInstance().sendMessage(MessageConstants.PRODUCT + productDto.getType().toString());
             }
         });
         fragmentProductBinding.productRv.addItemDecoration(new GridSpacingItemDecoration(3, 20, true));

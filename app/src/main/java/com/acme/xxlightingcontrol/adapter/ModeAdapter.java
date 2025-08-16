@@ -56,7 +56,13 @@ public class ModeAdapter extends RecyclerView.Adapter<ModeAdapter.ViewHolder> {
                         if (selectedPosition != RecyclerView.NO_POSITION) {
                             notifyItemChanged(selectedPosition);
                         }
-                        mRecyclerItemClickListener.onItemClick(v, adapterPosition);
+                        ModeDto modeDto = modeDtos.get(selectedPosition);
+                        if (!modeDto.isHaveChild()) {
+                            mRecyclerItemClickListener.onItemClick(v, adapterPosition);
+                        } else {
+                            RadioButton defaultCheckedButton = (RadioButton) ViewHolder.this.childModeRG.getChildAt(0);
+                            defaultCheckedButton.callOnClick();
+                        }
                     }
                 }
             });
@@ -125,7 +131,20 @@ public class ModeAdapter extends RecyclerView.Adapter<ModeAdapter.ViewHolder> {
                     childRadioButton.setOnClickListener(v -> {
                         UDPClient.getInstance().sendMessage(MessageConstants.LIGHT + childMode.getType());
                         modeDto.setSelectedChildIndex(childIndex);
-                        holder.itemView.callOnClick();
+//                        holder.itemView.callOnClick();
+                        int adapterPosition = holder.getAdapterPosition();
+                        if (adapterPosition != RecyclerView.NO_POSITION) {
+                            lastSelectedPosition = selectedPosition;
+                            selectedPosition = adapterPosition;
+                            if (lastSelectedPosition != RecyclerView.NO_POSITION) {
+                                notifyItemChanged(lastSelectedPosition);
+                            }
+                            if (selectedPosition != RecyclerView.NO_POSITION) {
+                                notifyItemChanged(selectedPosition);
+                            }
+                        }
+//                        mRecyclerItemClickListener.onItemClick(v, holder.getAdapterPosition());
+                        holder.bind(mContext, modeDto, position == selectedPosition);
                     });
                     holder.childModeRG.addView(childRadioButton);
                 }
