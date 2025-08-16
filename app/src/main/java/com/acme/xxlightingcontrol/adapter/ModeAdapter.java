@@ -131,7 +131,6 @@ public class ModeAdapter extends RecyclerView.Adapter<ModeAdapter.ViewHolder> {
                     childRadioButton.setOnClickListener(v -> {
                         UDPClient.getInstance().sendMessage(MessageConstants.LIGHT + childMode.getType());
                         modeDto.setSelectedChildIndex(childIndex);
-//                        holder.itemView.callOnClick();
                         int adapterPosition = holder.getAdapterPosition();
                         if (adapterPosition != RecyclerView.NO_POSITION) {
                             lastSelectedPosition = selectedPosition;
@@ -143,7 +142,6 @@ public class ModeAdapter extends RecyclerView.Adapter<ModeAdapter.ViewHolder> {
                                 notifyItemChanged(selectedPosition);
                             }
                         }
-//                        mRecyclerItemClickListener.onItemClick(v, holder.getAdapterPosition());
                         holder.bind(mContext, modeDto, position == selectedPosition);
                     });
                     holder.childModeRG.addView(childRadioButton);
