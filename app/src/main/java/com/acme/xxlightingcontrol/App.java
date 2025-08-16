@@ -73,7 +73,7 @@ public class App extends BaseApp implements UDPMessageListener {
             public void run() {
                 for (; ; ) {
                     try {
-                        Thread.sleep(1000L);
+                        Thread.sleep(300L);
                         if (udpServer.getChannel() == null) {
                             Log.e("APP", "等待UDP服务启动...");
                             continue;
