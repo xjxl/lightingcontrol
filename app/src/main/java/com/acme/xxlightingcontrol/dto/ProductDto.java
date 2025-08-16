@@ -25,7 +25,7 @@ public class ProductDto {
 
     private Integer type;
 
-    private int status;
+    private boolean play;
 
     public ProductDto() {
 
@@ -37,17 +37,6 @@ public class ProductDto {
 
     public ProductDto(String name) {
         this.name = name;
-    }
-
-    public ProductDto(Long id, String bgColor, String icon, Integer isCycle, String name, String nameEn, Integer type, int status) {
-        this.id = id;
-        this.bgColor = bgColor;
-        this.icon = icon;
-        this.isCycle = isCycle;
-        this.name = name;
-        this.nameEn = nameEn;
-        this.type = type;
-        this.status = status;
     }
 
     public Long getId() {
@@ -106,11 +95,12 @@ public class ProductDto {
         this.type = type;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean isPlay() {
+        return play;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPlay(boolean play) {
+        this.play = play;
     }
+
 }

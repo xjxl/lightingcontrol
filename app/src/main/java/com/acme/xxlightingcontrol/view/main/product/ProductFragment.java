@@ -14,7 +14,6 @@ import com.acme.xxlightingcontrol.databinding.FragmentProductBinding;
 import com.acme.xxlightingcontrol.dto.ProductDto;
 import com.acme.xxlightingcontrol.lib.annotation.Progress;
 import com.acme.xxlightingcontrol.lib.base.BaseFragment;
-import com.acme.xxlightingcontrol.lib.listener.OnRecyclerItemClickListener;
 import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
 import com.acme.xxlightingcontrol.lib.xutil.XSharedPreferences;
 import com.acme.xxlightingcontrol.lib.xutil.XToast;
@@ -103,13 +102,10 @@ public class ProductFragment extends BaseFragment implements ProductView {
 
     @Override
     protected void initAdapters() {
-        productAdapter = new ProductAdapter(getActivity(), products, new OnRecyclerItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                ProductDto productDto = products.get(position);
-                XToast.showShortMsg(getActivity(), productDto.getName());
-                UDPClient.getInstance().sendMessage(MessageConstants.PRODUCT + productDto.getType().toString());
-            }
+        productAdapter = new ProductAdapter(getActivity(), products, (v, position) -> {
+            ProductDto productDto = products.get(position);
+            UDPClient.getInstance().sendMessage(MessageConstants.PRODUCT + productDto.getType().toString());
+        }, (v, position) -> {
         });
         fragmentProductBinding.productRv.addItemDecoration(new GridSpacingItemDecoration(3, 20, true));
         fragmentProductBinding.productRv.setAdapter(productAdapter);

@@ -44,7 +44,6 @@ public class App extends BaseApp implements UDPMessageListener {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    SystemClock.sleep(TimeUnit.SECONDS.toMillis(5));
                     netInfos = NetInfoUtil.getNetInfo();
                     if (netInfos.size() <= 0) {
                         continue;
@@ -68,20 +67,19 @@ public class App extends BaseApp implements UDPMessageListener {
         udpServer = UDPServer.getInstance(this, 10002, statsManager);
         udpServer.serverStart();
         // 初始化客户端
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (; ; ) {
-                    try {
-                        Thread.sleep(300L);
-                        if (udpServer.getChannel() == null) {
-                            Log.e("APP", "等待UDP服务启动...");
-                            continue;
-                        }
-                        udpClient = UDPClient.getInstance(udpServer.getChannel(), NetInfoUtil.getBroadcastAddress(), 10000, statsManager);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+        new Thread(() -> {
+            for (; ; ) {
+                try {
+                    Thread.sleep(200L);
+                    if (udpServer.getChannel() == null) {
+                        Log.e("APP", "等待UDP服务启动...");
+                        continue;
                     }
+                    udpClient = UDPClient.getInstance(udpServer.getChannel(),
+                            NetInfoUtil.getBroadcastAddress(),
+                            10000, statsManager);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();

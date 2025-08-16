@@ -11,4 +11,8 @@ public class MessageConstants {
 
     public static final String PRODUCT = "light_";
 
+    public static final String PRODUCT_PLAY = "callon";
+
+    public static final String PRODUCT_PAUSE = "callloff";
+
 }
