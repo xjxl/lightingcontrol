@@ -16,7 +16,6 @@ import com.acme.xxlightingcontrol.lib.annotation.Progress;
 import com.acme.xxlightingcontrol.lib.base.BaseFragment;
 import com.acme.xxlightingcontrol.lib.net.udp.UDPClient;
 import com.acme.xxlightingcontrol.lib.xutil.XSharedPreferences;
-import com.acme.xxlightingcontrol.lib.xutil.XToast;
 import com.acme.xxlightingcontrol.module.PresenterModule;
 import com.acme.xxlightingcontrol.prosenter.ProductPresenter;
 
@@ -106,10 +105,23 @@ public class ProductFragment extends BaseFragment implements ProductView {
             ProductDto productDto = products.get(position);
             UDPClient.getInstance().sendMessage(MessageConstants.PRODUCT + productDto.getType().toString());
         }, (v, position) -> {
+            ProductDialogFragment productDialogFragment = ProductDialogFragment.newInstance(new ProductDialogFragment.XDialogListener() {
+                @Override
+                public void onDialogPositiveClick(ProductDialogFragment dialog) {
+                }
+
+                @Override
+                public void setNegativeClick(ProductDialogFragment dialog) {
+
+                }
+            }, products);
+
+            productDialogFragment.show(getActivity().getSupportFragmentManager(), TAG);
         });
         fragmentProductBinding.productRv.addItemDecoration(new GridSpacingItemDecoration(3, 20, true));
         fragmentProductBinding.productRv.setAdapter(productAdapter);
     }
+
 
     @Override
     public void success(int code, String msg, String tag, Object o) {

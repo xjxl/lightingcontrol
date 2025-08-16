@@ -7,6 +7,10 @@
     <color name="colorPrimaryLogin">#3EBAFF</color>
     <!--<color name="colorPrimaryDark">#FF1976D2</color>-->
     <color name="colorPrimaryDark">#2185c5</color>
+    <color name="product_dialog_fragment_bg">#182a36</color>
+    <color name="product_dialog_fragment_tablayout_item_text_selected">#9FFFFFFF</color>
+    <color name="product_dialog_fragment_tablayout_bg">#322E8F</color>
+    <color name="product_dialog_fragment_tablayout_bg_on">#5e65ad</color>
     <color name="colorAccent">#FFFF5A00</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#525151</color>

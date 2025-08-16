@@ -2,11 +2,13 @@ package com.acme.xxlightingcontrol.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 
 /**
  * @author jx9@msn.com
  */
-public class ProductDto {
+public class ProductDto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Long id;
 

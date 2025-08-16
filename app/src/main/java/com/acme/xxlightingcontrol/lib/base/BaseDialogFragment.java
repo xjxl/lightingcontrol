@@ -7,13 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.acme.xxlightingcontrol.databinding.BaseDialogFragmentBinding;
-
 public abstract class BaseDialogFragment extends DialogFragment {
 
     protected View view;
-
-    protected BaseDialogFragmentBinding baseDialogFragmentBinding;
 
     public BaseDialogFragment() {
 
@@ -23,7 +19,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-        baseDialogFragmentBinding = baseDialogFragmentBinding.inflate(getLayoutInflater());
     }
 
     @Override
